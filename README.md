@@ -1,130 +1,55 @@
-ArchBoost (v1)
+# ArchBoost
 
-ArchBoost is a Rust-based single-run bootstrap tool for Arch-based Linux systems (Arch Linux, EndeavourOS, Garuda, Hyprland). It installs essential tools, enables safe performance optimizations, and applies beginner-friendly privacy defaults on a fresh system.
+Simple Rust CLI tool for bootstrapping a fresh Arch-based Linux system with essential packages, performance optimizations, and safe privacy defaults.
 
-This version is designed for fresh installs only. It avoids unsafe or destructive operations.
+Install the binary in `/usr/local/bin` and run `archboost` from anywhere.
 
-Features
-Performance and Stability
+## Requirements
 
-Enables SSD TRIM
+- Arch Linux or Arch-based distro (EndeavourOS, Garuda, Hyprland, etc.)
+- pacman
+- Rust (cargo, rustc)
+- sudo
 
-Installs earlyoom to prevent system freezes
+## Installation
 
-Installs PipeWire audio stack
+Install Rust if needed:
 
-Installs performance monitoring tools (btop, htop)
+sudo pacman -S rustup
+rustup default stable
 
-Updates the system
+Clone the repository:
 
-Privacy and Security (Safe Defaults)
+cd Desktop
 
-Enables UFW firewall with default deny incoming and allow outgoing
+git clone https://github.com/DevSwirl/ArchBoostV1.git
 
-Installs Signal Desktop
+cd ArchBoostV1
 
-Uses only official pacman packages
+cd sysnew
 
-Safe for first startup, no network lockouts
+cd src
 
-No DNS or IPv6 changes
+Build the project:
 
-Developer and Power-User Tools
+rustc sysnew.rs
 
-Git, base-devel, linux headers
+Transfer binary for system-wide use:
 
-Rust toolchain via rustup
-
-Neovim
-
-CLI utilities: bat, exa, ripgrep, fzf, zoxide
-
-Fastfetch system info
-
-Desktop and Productivity Apps
-
-LibreOffice
-
-Thunderbird
-
-GIMP
-
-Obsidian
-
-PipeWire + WirePlumber
-
-Bluetooth stack (BlueZ)
-
-Supported Systems:
-
-Arch Linux
-
-EndeavourOS
-
-Garuda
-
-Hyprland-based installs
-
-GNOME / KDE / X11 / Wayland
-
-Requirements:
-
-Working desktop environment or window manager
-
-systemd
-
-pacman package manager
-
-User with sudo access
+sudo mv /home/{YOUR_NAME}/Desktop/ArchBoostV1/sysnew/src/sysnew /usr/local/bin/
 
 Usage
-git clone https://github.com/DevSwirl/ArchBoostV1.git
-cd 
-cargo build --release
-./target/release/archboost
 
+Run:
 
-You will be prompted for your sudo password.
+sysnew
 
-Limitations
+You will be prompted for your sudo password. The program will install essential packages, enable services like earlyoom and fstrim.timer, and configure safe defaults for a fresh system.
+Development
 
-This version does not:
+Run without installing:
 
-Modify kernel or sysctl beyond safe defaults
-
-Replace DNS or enforce DoH
-
-Configure nftables/iptables
-
-Enable Tor routing or VPN kill switches
-
-Remount filesystems or change permissions
-
-Apply desktop-specific tweaks
-
-These features may be added in future versions as optional modules.
-
-Roadmap
-
-v2: Safe kernel and sysctl hardening (opt-in)
-
-v3: DNS privacy and leak protection
-
-v4: VPN/Tor profiles
-
-v5: Idempotency and rollback support
-
-Profile system: balanced, privacy, paranoid
-
-Contributing
-
-Pull requests are welcome. When contributing:
-
-Keep changes opt-in and safe for first startup
-
-Use official Arch repositories
-
-Avoid desktop-specific breakage
+cargo run
 
 License
 
